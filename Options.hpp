@@ -86,25 +86,30 @@ class NumRangeOpt : public Option{
 };
 class Options{
     public:
-    static void AddIntOption(string name_, string description, int def_val){
+    static NumOpt* AddIntOption(string name_, string description, int def_val){
         NumOpt *opt = new NumOpt(name_, description, def_val); 
         opt_map.emplace(make_pair(name_,opt));  
+        return opt;
     }
-    static void AddStringOption(string name_, string description, string def_val){
+    static StringOpt* AddStringOption(string name_, string description, string def_val){
         StringOpt *opt = new StringOpt(name_, description, def_val); 
         opt_map.emplace(make_pair(name_,opt));  
+        return opt;
     }
-    static void AddBoolOption(string name_, string description, bool def_val){
+    static BoolOpt* AddBoolOption(string name_, string description, bool def_val){
         BoolOpt *opt = new BoolOpt(name_, description, def_val); 
         opt_map.emplace(make_pair(name_,opt));  
+        return opt;
     }
-    static void AddIntListOption(string name_, string description){
+    static NumListOpt* AddIntListOption(string name_, string description){
         NumListOpt *opt = new NumListOpt(name_, description, {}); 
-        opt_map.emplace(make_pair(name_,opt));  
+        opt_map.emplace(make_pair(name_,opt)); 
+        return opt; 
     }
-    static void AddIntRangeOption(string name_, string description){
+    static NumRangeOpt* AddIntRangeOption(string name_, string description){
         NumRangeOpt *opt = new NumRangeOpt(name_, description, {}); 
-        opt_map.emplace(make_pair(name_,opt));  
+        opt_map.emplace(make_pair(name_,opt)); 
+        return opt; 
     }
     static bool wasSet(string name_){
         return opt_map.find(name_)->second->setByUser;
